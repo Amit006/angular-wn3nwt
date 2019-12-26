@@ -45,7 +45,7 @@ constructor( private UsersService: UsersService,){
         
         },
         error => {
-          console.log(' Unable to getData from Service ')
+          console.log(' Unable to getData from Service ', error)
           this.allmessage = {
             type: 'danger',
             error: 'error',
