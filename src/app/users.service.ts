@@ -29,7 +29,6 @@ export class UsersService {
 
   getAll() {
     return this.http.get<any>(this.apiUrl, this.httpOptions).pipe(map(user => {
-      console.log(' user  service : ', user);
       localStorage.setItem('allUser', JSON.stringify(user));
       this.currentAllUserSubject.next(user);
       return user;
