@@ -36,7 +36,7 @@ constructor( private UsersService: UsersService,){
     // .pipe(first())
       .subscribe(
         data => {
-          console.log(' All data');
+          console.log(' All data', data);
           this.allmessage = {
             type: 'success',
             error: 'error',
