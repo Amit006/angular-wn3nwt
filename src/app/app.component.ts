@@ -37,6 +37,9 @@ constructor( private UsersService: UsersService,){
       .subscribe(
         data => {
           console.log(' All data', data);
+          this.persons = data;
+          // Calling the DT trigger to manually render the table
+          this.dtTrigger.next();
           this.allmessage = {
             type: 'success',
             error: 'error',
