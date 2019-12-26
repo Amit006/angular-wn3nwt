@@ -2,7 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Http, Response } from '@angular/http';
 import { Subject } from 'rxjs';
 import { DataTableDirective } from "angular-DataTables";
-
+import { HttpHeaders } from '@angular/common/http';
 // import { range } from 'rxjs';
 // import { map, filter } from 'rxjs/operators';
 
@@ -22,6 +22,15 @@ export class AppComponent implements OnDestroy, OnInit {
   // thus we ensure the data is fetched before rendering
   dtTrigger: Subject<any> = new Subject();
   ApiUrl = 'http://165.227.84.251:3006/users/alluser';
+  httpOptions  = {
+    headers: new HttpHeaders({
+      'Access-Control-Allow-Origin': '*',
+      'Access-Control-Allow-Methods': 'GET, POST, PATCH, PUT, DELETE, OPTIONS',
+      'Access-Control-Allow-Headers': 'Origin, Content-Type, X-Auth-Token',
+      // Authorization: 'authkey',
+      // userid: '1'
+    })
+  }
 
 
 constructor(private http: Http){
