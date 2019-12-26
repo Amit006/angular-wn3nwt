@@ -19,6 +19,7 @@ export class UsersService {
     })
   }
    ApiUrl = 'http://165.227.84.251:3006/users/alluser';
+   apiUrl = 'https://jsonplaceholder.typicode.com/users';
   constructor(private http: HttpClient) { 
 
         this.currentAllUserSubject = new BehaviorSubject<any>(JSON.parse(localStorage.getItem('allUser')));
@@ -27,7 +28,7 @@ export class UsersService {
 
 
   getAll() {
-    return this.http.get<any>(this.ApiUrl, this.httpOptions).pipe(map(user => {
+    return this.http.get<any>(this.apiUrl, this.httpOptions).pipe(map(user => {
       console.log(' user  service : ', user);
       localStorage.setItem('allUser', JSON.stringify(user));
       this.currentAllUserSubject.next(user);
