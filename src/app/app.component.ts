@@ -58,6 +58,7 @@ constructor(private http: Http){
   }
 
   private extractData(res: Response) {
+    console.log(' res: ', res);
     const body = res.json();
     return body.data || {};
   }
