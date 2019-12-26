@@ -3,6 +3,7 @@ import { Http, Response } from '@angular/http';
 import { Subject } from 'rxjs';
 import { DataTableDirective } from "angular-DataTables";
 import { HttpHeaders } from '@angular/common/http';
+import { UsersService } from './users.service';
 // import { range } from 'rxjs';
 // import { map, filter } from 'rxjs/operators';
 
@@ -21,19 +22,9 @@ export class AppComponent implements OnDestroy, OnInit {
     // We use this trigger because fetching the list of persons can be quite long,
   // thus we ensure the data is fetched before rendering
   dtTrigger: Subject<any> = new Subject();
-  ApiUrl = 'http://165.227.84.251:3006/users/alluser';
-  httpOptions  = {
-    headers: new HttpHeaders({
-      'Access-Control-Allow-Origin': '*',
-      'Access-Control-Allow-Methods': 'GET, POST, PATCH, PUT, DELETE, OPTIONS',
-      'Access-Control-Allow-Headers': 'Origin, Content-Type, X-Auth-Token',
-      // Authorization: 'authkey',
-      // userid: '1'
-    })
-  }
+ allmessage = {}
 
-
-constructor(private http: Http){
+constructor( private UsersService: UsersService,){
 
 }
   ngOnInit(): void {
@@ -41,15 +32,27 @@ constructor(private http: Http){
       pagingType: 'full_numbers',
       pageLength: 2
     };
-    this.http.get(this.ApiUrl)
-      .map(this.extractData)
-      .subscribe(persons => {
-        console.group(' From Api Data');
-        this.persons = persons;
-        console.groupEnd();
-        // Calling the DT trigger to manually render the table
-        this.dtTrigger.next();
-      });
+    this.UsersService.getAll()
+    // .pipe(first())
+      .subscribe(
+        data => {
+          console.log(' All data');
+          this.allmessage = {
+            type: 'success',
+            error: 'error',
+            text: ' Successfully get All-Library Records'
+          };
+        
+        },
+        error => {
+      
+          this.allmessage = {
+            type: 'danger',
+            error: 'error',
+            text: 'Unable to get All-Library Records'
+          };
+        });
+   
   }
 
   ngOnDestroy () {
