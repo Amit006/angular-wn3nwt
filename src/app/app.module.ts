@@ -10,6 +10,7 @@ import { HttpClientModule } from '@angular/common/http';
 
 import { HttpModule } from '@angular/http';
 import { UsersService } from './users.service';
+declare let $: any;
 
 @NgModule({
   imports:      [ BrowserModule, FormsModule, DataTablesModule, HttpModule, HttpClientModule ],

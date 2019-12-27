@@ -8,6 +8,7 @@ import { UsersService } from './users.service';
 // import { map, filter } from 'rxjs/operators';
 
 import 'rxjs/add/operator/map';
+declare let $: any;
 
 @Component({
   selector: 'my-app',
@@ -40,6 +41,7 @@ constructor( private UsersService: UsersService,){
           this.persons = data;
           // Calling the DT trigger to manually render the table
           this.dtTrigger.next();
+
           this.allmessage = {
             type: 'success',
             error: 'error',
